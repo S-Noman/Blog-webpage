@@ -1,0 +1,24 @@
+.navbar-container{
+    background-color: rgb(7, 7, 7);
+    color: white;
+    width: auto;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+}
+
+img{
+    width: 120px;
+    padding-left: 15px;
+    padding-top: 10px;
+
+}
+.navbar-links{
+    color: white;
+    padding: 20px;
+    text-decoration: none;
+}
+
