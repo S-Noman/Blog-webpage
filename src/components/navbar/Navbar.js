@@ -1,22 +1,21 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
-// import './Navbar.css'
-import logo from "./logo.svg";
-import Footer from "../footer/Footer";
+import { Link } from "react-router-dom";
+import './Navbar.css'
 
 const Navbar = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/" href="#">
-            <img src={logo} alt="" height="50" />
+          <Link className="navbar-brand"  to="/" href="#">
+            <img src='https://youthink.la/wp-content/themes/youthinkadult/assets/images/footer-logo.svg' alt=" " id='logo'/>
           </Link>
         </div>
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            <li className="nav-item ">
               <Link
+                id="link"
                 to="/"
                 className="nav-link active"
                 aria-current="page"
@@ -28,6 +27,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link
+                id="link"
                 to="./blog"
                 className="nav-link"
                 href="#"
@@ -36,6 +36,7 @@ const Navbar = () => {
                 Blog
               </Link>
             </li>
+            <li className="nav-item"></li>
           </ul>
         </div>
       </nav>

@@ -5,7 +5,6 @@ import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
 import BlogsPage from "./pages/BlogsPage";
 import SinglePost from "./pages/SinglePost";
-import { useParams } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 
 const App = () => {

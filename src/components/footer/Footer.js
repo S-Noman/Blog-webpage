@@ -1,36 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import "./Footer.css";
 
 const Footer = () => {
-async function postData(url = 'https://www.wp-course.site/wp-json/youthink/subscribe', data = {}) {
-    const response = await fetch(url, {
-      method: 'POST', 
-      mode: 'cors', 
-      cache: 'no-cache',
-      credentials: 'same-origin', 
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      redirect: 'follow', 
-      referrerPolicy: 'no-referrer', 
-      body: JSON.stringify(data) 
-    });
-    return response.json(); 
+  function postEmail() {
+    let data = { email };
+
+    fetch("https://www.wp-course.site/wp-json/youthink/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .then(() => {
+        setMsg(" Thank you for subscribing !");
+      });
   }
 
-//   postData('https://www.wp-course.site/wp-json/youthink/subscribe', { answer: 42 })
-//     .then(data => {
-//       console.log(data); 
-//     });
-  
+  const [email, setEmail] = useState("");
+  const [msg, setMsg] = useState("");
 
   return (
-    <footer className="page-footer font-small indigo">
+    <footer
+      id="footer"
+      className="page-footer font-small indigo bg-dark text-light "
+    >
       <div className="container text-center text-md-left">
         <div className="row">
           <hr className="clearfix w-100 d-md-none" />
           <div className="col-md-3 mx-auto">
-            <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-            <ul className="list-unstyled">
+            <h5 className="font-weight-bold text-uppercase mt-3 mb-4 text-light">
+              Links
+            </h5>
+            <ul className="list-unstyled ">
               <li>
                 <a href="#!">Link 1</a>
               </li>
@@ -63,24 +66,28 @@ async function postData(url = 'https://www.wp-course.site/wp-json/youthink/subsc
               </li>
             </ul>
           </div>
-          <hr className="clearfix w-100 d-md-none" />
-          <div className="col-md-3 mb-4">
+          <div className="col-md-3 pt-5 ">
             <form className="input-group">
-              <input
-                type="text"
-                className="form-control form-control-sm"
-                placeholder="Your email"
-                aria-label="Your email"
-                aria-describedby="basic-addon2"
-              />
-              <div className="input-group-append">
+              <div className="input-group mb-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  className="form-control"
+                  placeholder="Provide your email"
+                />
                 <button
-                  className="btn btn-sm btn-outline-white my-0"
-                  type="button" onClick={postData}
+                  className="btn btn-primary"
+                  type="button"
+                  id="button-addon2"
+                  onClick={postEmail}
                 >
                   Subscribe
                 </button>
               </div>
+              <small>{msg}</small>
             </form>
           </div>
         </div>

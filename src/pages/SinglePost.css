@@ -1,3 +1,23 @@
+.sub-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    padding: 2em 0;
+}
+
+.sidebar-fixed{
+    position: sticky;
+    width: 25%;
+    height: 100%;
+    z-index: 0;
+    top: 89px;
+}
+
 .SinglePostContainer{
+    width: 60%;
     margin-left: 30px;
+    margin-right: 50px;
+    overflow-x: hidden;
+    margin-top: 60px;
 }

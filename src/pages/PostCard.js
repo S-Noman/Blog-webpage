@@ -5,8 +5,8 @@ const PostCard = ({ post }) => {
   const { title, date, excerpt, thumbnail, tags, slug } = post;
 
   return (
-    <Link to={`/blog/${slug}`}>
-      <div className="card m-5 " style={{ width: "800px" }}>
+    <div className="card m-5 " style={{ width: "800px" }}>
+      <Link to={`/blog/${slug}`}>
         <img src={thumbnail} className="card-img-top mx-auto" alt={title} />
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
@@ -14,12 +14,15 @@ const PostCard = ({ post }) => {
           <p className="card-text">
             <small className="text-muted">{date}</small>
           </p>
-          <p>
-            <small className="text-muted p-2">{tags}</small>
-          </p>
+            {tags &&
+              tags.map((tag, index) => (
+                <small className="text-muted " key={index}>
+                  {`${index == tags.length - 1 ? tag : tag + " , "}`}
+                </small>
+              ))}
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

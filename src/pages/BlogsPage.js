@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import PostCard from "./PostCard";
 import Comments from "./Comments";
+import './BlogsPage.css';
 
 const BlogsPage = () => {
   const [posts, setPosts] = useState([
@@ -11,36 +12,25 @@ const BlogsPage = () => {
       excerpt: "",
       thumbnail: "",
       slug: "",
-      tags: [""],
+      tags: [ "  " ],
       views: 0,
-    },
-  ]);
-
-  const [comments, setComments] = useState([
-    {
-      author_name: '',
-      date: "",
-      author_avatar_urls: '',
-      content: '',
     },
   ]);
 
   const [flag, setFlag] = useState(0);
   const [noMore, setNoMore] = useState(0);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(2);
   const [more, setMore] = useState([]);
-  
+
   const loadMore = () => {
-    setLoading(true);
     setPage(page + 1);
-    
+
     if (page > 3) setNoMore(1);
     fetch(`https://www.wp-course.site/wp-json/youthink/posts?page=${page}`)
       .then((response) => response.json())
       .then((json) => {
         setMore([...more, ...json.data]);
-        setLoading(false);
       });
     setFlag(1);
   };
@@ -53,47 +43,34 @@ const BlogsPage = () => {
       });
   }, [!posts]);
 
-
-  useEffect(() => {
-    fetch("https://www.wp-course.site/wp-json/wp/v2/comments")
-      .then((response) => response.json())
-      .then((json) => {
-        setComments(json);
-      });
-  }, []);
-
   return (
-    <>
-          <div>
-        {posts.map((post, i) => {
+    <div className="overall-container">
+    <div className="sub-container">
+      <div>
+      {posts.map((post, i) => {
           return <PostCard post={post} key={i} />;
         })}
-        {flag == 1
+        {flag === 1
           ? more.map((post, i) => {
               return <PostCard post={post} key={i} />;
             })
           : ""}
       </div>
-      {noMore == 0 ? (
-        <button type="button" disabled={loading} onClick={loadMore}>
-          Load more
-        </button>
+      <div className="sidebar-fixed" >
+        <Comments />
+      </div>
+      </div>
+      {noMore === 0 ? (
+        <div className="d-grid gap-2 col-2 mx-auto mb-3">
+          <button className="btn btn-primary" type="button" onClick={loadMore}>
+            Load more
+          </button>
+        </div>
       ) : (
         ""
       )}
-    </>
+    </div>   
   );
 };
 
 export default BlogsPage;
-
-{
-  /* <div className="col-4 my-3">
-        <Comments comment={comment}/>
-      </div> */
-}
-{
-  /* {comments.map((comment) => {
-        return <Comments comment={comment}/>;
-      })} */
-}
